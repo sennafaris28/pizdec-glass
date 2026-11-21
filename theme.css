@@ -1,0 +1,337 @@
+/* ============================================================
+   Pizdec Glass — an Obsidian theme
+   by pizdec.tv
+
+   Frosted glass on a blue wallpaper, with raised navy platforms
+   for anything you read or type in.
+
+   Palette
+     #0055b1 → #082990 → #03205b   wallpaper (diagonal gradient)
+     #283862                        glass (sidebars, tab bar, menus) — translucent
+     #000f21                        platform (editor, modals) — near-opaque navy
+     #1b3156                        raised (cards, fields, chips)
+     #2a3a45                        dividers (--- and tables only)
+     #009afe                        main accent     (HSL 204, 100%, 50%)
+     #59e7df                        secondary accent
+
+   Rules: no grey outlines; text never sits on raw glass; white headings.
+   ============================================================ */
+
+.theme-dark,
+.theme-light {
+  --accent-h: 204;
+  --accent-s: 100%;
+  --accent-l: 50%;
+  --color-accent: #009afe;
+  --color-accent-1: #33aeff; /* lighter hover */
+  --color-accent-2: #007fd1; /* darker active */
+}
+
+.theme-dark {
+  /* --- Palette tokens --- */
+  --pg-wall-1: #0055b1;
+  --pg-wall-2: #082990;
+  --pg-wall-3: #03205b;
+  --pg-wallpaper: linear-gradient(135deg, var(--pg-wall-1) 0%, var(--pg-wall-2) 48%, var(--pg-wall-3) 100%);
+
+  --pg-glass: rgba(40, 56, 98, 0.46);        /* #283862 frosted */
+  --pg-glass-strong: rgba(22, 34, 66, 0.72); /* menus / popovers: more opaque for text */
+  --pg-blur: blur(22px) saturate(160%);
+
+  --pg-platform: rgba(0, 15, 33, 0.9);       /* #000f21 */
+  --pg-platform-solid: #000f21;
+  --pg-platform-2: #04172d;                  /* inputs, code, alt rows */
+  --pg-raised: #1b3156;
+  --pg-raised-hover: #233c66;
+  --pg-line: #2a3a45;
+  --pg-accent-2: #59e7df;
+
+  --pg-text: #e8eef7;
+  --pg-text-muted: #9fb0c8;
+  --pg-text-faint: #5f7391;
+
+  --pg-shadow: 0 10px 30px rgba(0, 6, 20, 0.45), 0 2px 6px rgba(0, 6, 20, 0.3);
+  --pg-radius: 14px;
+
+  /* --- Base surfaces --- */
+  --background-primary: var(--pg-platform-solid);
+  --background-primary-alt: var(--pg-platform-2);
+  --background-secondary: #0b1f3d;
+  --background-secondary-alt: var(--pg-raised);
+
+  /* No grey outlines; focus rings stay. */
+  --background-modifier-border: transparent;
+  --background-modifier-border-hover: transparent;
+  --background-modifier-border-focus: var(--color-accent);
+  --hr-color: var(--pg-line);
+  --background-modifier-hover: rgba(120, 160, 230, 0.12);
+  --background-modifier-active-hover: rgba(120, 160, 230, 0.2);
+  --background-modifier-form-field: var(--pg-platform-2);
+  --background-modifier-cover: rgba(0, 8, 24, 0.35);
+
+  /* --- Text --- */
+  --text-normal: var(--pg-text);
+  --text-muted: var(--pg-text-muted);
+  --text-faint: var(--pg-text-faint);
+  --text-on-accent: #ffffff;
+  --text-accent: var(--color-accent);
+  --text-accent-hover: var(--color-accent-1);
+  --text-selection: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.28);
+  --text-highlight-bg: rgba(89, 231, 223, 0.22);
+
+  /* --- Secondary accent spots --- */
+  --caret-color: var(--pg-accent-2);
+  --list-marker-color: rgba(89, 231, 223, 0.7);
+  --list-marker-color-hover: var(--pg-accent-2);
+  --blockquote-border-color: var(--pg-accent-2);
+  --checkbox-color: var(--pg-accent-2);
+  --checkbox-color-hover: #7eede7;
+  --checkbox-marker-color: var(--pg-platform-solid);
+  --nav-item-color-active: var(--pg-accent-2);
+  --nav-item-background-active: var(--background-modifier-hover);
+  --nav-indentation-guide-color: rgba(159, 176, 200, 0.18);
+
+  /* --- Interactive --- */
+  --interactive-normal: var(--pg-raised);
+  --interactive-hover: var(--pg-raised-hover);
+  --interactive-accent: var(--color-accent);
+  --interactive-accent-hover: var(--color-accent-1);
+  --interactive-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+
+  /* --- Headings: all white --- */
+  --h1-color: var(--text-normal);
+  --h2-color: var(--text-normal);
+  --h3-color: var(--text-normal);
+  --h4-color: var(--text-normal);
+  --h5-color: var(--text-normal);
+  --h6-color: var(--text-normal);
+
+  /* --- Links, tags, code --- */
+  --link-color: var(--color-accent);
+  --link-color-hover: var(--color-accent-1);
+  --link-unresolved-color: #e08a8a;
+  --tag-color: var(--color-accent-1);
+  --tag-background: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.14);
+  --tag-background-hover: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.24);
+  --code-background: var(--pg-platform-2);
+  --code-normal: var(--pg-accent-2);
+  --code-comment: var(--pg-text-faint);
+  --code-function: #74c0ff;
+  --code-keyword: #f07aa8;
+  --code-string: #7fd6a0;
+  --code-property: var(--color-accent-1);
+  --code-value: #e3a96b;
+
+  /* --- Scrollbars --- */
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: rgba(89, 231, 223, 0.35);
+  --scrollbar-active-thumb-bg: rgba(89, 231, 223, 0.75);
+
+  /* --- Dividers & tables --- */
+  --divider-color: transparent;
+  --divider-color-hover: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.5);
+  --table-border-color: var(--pg-line);
+  --table-header-background: var(--pg-raised);
+  --table-row-alt-background: var(--pg-platform-2);
+
+  /* --- Chrome --- */
+  --titlebar-background: transparent;
+  --titlebar-background-focused: transparent;
+  --titlebar-text-color: var(--text-muted);
+  --ribbon-background: transparent;
+  --ribbon-background-collapsed: transparent;
+  --tab-container-background: transparent;
+  --tab-outline-color: transparent;
+  --tab-outline-width: 0px;
+  --tab-divider-color: transparent;
+  --tab-background-active: var(--pg-platform-solid);
+  --tab-text-color: var(--text-muted);
+  --tab-text-color-active: var(--text-normal);
+  --tab-text-color-focused: var(--text-muted);
+  --tab-text-color-focused-active: var(--text-normal);
+  --tab-text-color-focused-active-current: var(--pg-accent-2);
+  --status-bar-background: var(--pg-glass);
+  --status-bar-border-color: transparent;
+
+  /* --- Overlays: frosted --- */
+  --modal-background: var(--pg-platform);
+  --modal-border-color: transparent;
+  --modal-border-width: 0px;
+  --menu-background: var(--pg-glass-strong);
+  --menu-backdrop-filter: var(--pg-blur);
+  --menu-border-color: transparent;
+  --prompt-background: var(--pg-glass-strong);
+  --prompt-backdrop-filter: var(--pg-blur);
+  --prompt-border-color: transparent;
+}
+
+/* ------------------------------------------------------------
+   Wallpaper — everything above it is glass or a platform.
+   ------------------------------------------------------------ */
+body.theme-dark {
+  background: var(--pg-wall-3);
+  background-image: var(--pg-wallpaper);
+  background-attachment: fixed;
+}
+.theme-dark .app-container,
+.theme-dark .horizontal-main-container,
+.theme-dark .workspace,
+.theme-dark .titlebar,
+.theme-dark .titlebar-inner,
+.theme-dark .workspace-ribbon,
+.theme-dark .workspace-ribbon.mod-left {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none;
+}
+.theme-dark .workspace-ribbon::before { border: none !important; }
+
+/* Desktop: panes float as rounded cards with gaps so the wallpaper shows. */
+body.theme-dark:not(.is-mobile) .workspace {
+  padding: 0 8px 8px;
+  gap: 8px;
+}
+body.theme-dark:not(.is-mobile) .workspace-split.mod-root,
+body.theme-dark:not(.is-mobile) .workspace-split.mod-left-split,
+body.theme-dark:not(.is-mobile) .workspace-split.mod-right-split {
+  border-radius: var(--pg-radius);
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+   Glass — sidebars, the editor's tab bar, status bar.
+   ------------------------------------------------------------ */
+.theme-dark .workspace-split.mod-left-split,
+.theme-dark .workspace-split.mod-right-split {
+  background: var(--pg-glass) !important;
+  -webkit-backdrop-filter: var(--pg-blur);
+  backdrop-filter: var(--pg-blur);
+  border: none !important;
+  box-shadow: var(--pg-shadow);
+}
+.theme-dark .mod-left-split .workspace-leaf,
+.theme-dark .mod-right-split .workspace-leaf,
+.theme-dark .mod-left-split .workspace-leaf-content,
+.theme-dark .mod-right-split .workspace-leaf-content,
+.theme-dark .mod-left-split .view-content,
+.theme-dark .mod-right-split .view-content,
+.theme-dark .mod-left-split .nav-header,
+.theme-dark .mod-right-split .nav-header,
+.theme-dark .mod-left-split .nav-buttons-container,
+.theme-dark .mod-right-split .nav-buttons-container,
+.theme-dark .mod-left-split .workspace-tab-header-container,
+.theme-dark .mod-right-split .workspace-tab-header-container {
+  background: transparent !important;
+}
+
+/* ------------------------------------------------------------
+   Platform — the editor area: near-opaque navy, raised.
+   Its tab bar is a glass header strip on top, like iCloud's cards.
+   ------------------------------------------------------------ */
+.theme-dark .workspace-split.mod-root {
+  background: var(--pg-platform) !important;
+  box-shadow: var(--pg-shadow);
+}
+.theme-dark .mod-root .workspace-tab-header-container {
+  background: var(--pg-glass) !important;
+  -webkit-backdrop-filter: var(--pg-blur);
+  backdrop-filter: var(--pg-blur);
+  border: none !important;
+  padding-top: 4px;
+}
+.theme-dark .workspace-tab-container,
+.theme-dark .workspace-leaf,
+.theme-dark .view-header {
+  border-color: transparent !important;
+}
+.theme-dark .view-header { background: transparent !important; border: none !important; }
+
+/* Tabs: inactive = soft chips on the glass; active = navy card joined to the page. */
+.theme-dark .workspace-tab-header {
+  background: transparent !important;
+  border: none !important;
+  margin: 0 2px;
+}
+.theme-dark .workspace-tab-header::before,
+.theme-dark .workspace-tab-header::after { display: none !important; }
+.theme-dark .workspace-tab-header-inner { border-radius: 8px; transition: background 0.1s ease; }
+.theme-dark .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner {
+  background: var(--background-modifier-hover);
+}
+.theme-dark .workspace-tab-header.is-active {
+  background: var(--pg-platform-solid) !important;
+  border-radius: 10px 10px 0 0;
+  box-shadow: inset 0 2px 0 0 var(--color-accent);
+}
+.theme-dark .mod-left-split .workspace-tab-header.is-active,
+.theme-dark .mod-right-split .workspace-tab-header.is-active {
+  background: rgba(0, 15, 33, 0.55) !important;
+  border-radius: 8px;
+}
+
+/* Status bar: a small floating glass pill. */
+.theme-dark .status-bar {
+  -webkit-backdrop-filter: var(--pg-blur);
+  backdrop-filter: var(--pg-blur);
+  border: none !important;
+  border-radius: 10px 0 0 0;
+  box-shadow: var(--pg-shadow);
+}
+
+/* Window controls sit flush on the wallpaper. */
+.theme-dark .titlebar-button-container,
+.theme-dark .titlebar-button { background: transparent !important; }
+.theme-dark .titlebar-button:hover { background: var(--background-modifier-hover) !important; }
+
+/* ------------------------------------------------------------
+   Overlays — modals are navy platforms over a frosted backdrop;
+   menus, popovers, suggestions and the command palette are glass.
+   ------------------------------------------------------------ */
+.theme-dark .modal-bg {
+  background: var(--background-modifier-cover);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.theme-dark .modal {
+  -webkit-backdrop-filter: var(--pg-blur);
+  backdrop-filter: var(--pg-blur);
+  border: none !important;
+  border-radius: var(--pg-radius);
+  box-shadow: 0 20px 60px rgba(0, 6, 20, 0.6);
+}
+.theme-dark .popover,
+.theme-dark .suggestion-container {
+  background: var(--pg-glass-strong) !important;
+  -webkit-backdrop-filter: var(--pg-blur);
+  backdrop-filter: var(--pg-blur);
+  border: none !important;
+  border-radius: 12px;
+  box-shadow: var(--pg-shadow);
+}
+.theme-dark .menu { -webkit-backdrop-filter: var(--pg-blur); border: none !important; box-shadow: var(--pg-shadow); }
+.theme-dark .prompt { -webkit-backdrop-filter: var(--pg-blur); }
+
+/* Accent focus ring on inputs. */
+.theme-dark input:focus,
+.theme-dark textarea:focus,
+.theme-dark .dropdown:focus {
+  box-shadow: 0 0 0 2px hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4);
+}
+
+/* ------------------------------------------------------------
+   NoteBoard plugin hooks (ignored when the plugin isn't installed)
+   Board sits on the navy platform: blue panels, slate-blue raised cards.
+   ------------------------------------------------------------ */
+.theme-dark {
+  --nk-surface: #0b1f3d;
+  --nk-raised: var(--pg-raised);
+  --nk-raised-hover: var(--pg-raised-hover);
+  --nk-accent-2: var(--pg-accent-2);
+  --nk-on-accent-2: var(--pg-platform-solid);
+  --nk-modal-bg: var(--pg-platform-solid);
+}
+
+/* ------------------------------------------------------------
+   Lighter on the GPU: phones/tablets get less blur.
+   ------------------------------------------------------------ */
+body.theme-dark.is-mobile { --pg-blur: blur(14px) saturate(150%); }
